@@ -14,6 +14,11 @@ class CreateNote(generics.CreateAPIView):
     serializer_class = NoteInstanceSerializer
 
 
+class RetrieveNote(generics.RetrieveAPIView):
+    queryset = NoteInstance.objects.all()
+    serializer_class = NoteInstanceSerializer
+
+
 class ListNote(generics.ListAPIView):
     queryset = NoteInstance.objects.all()
     serializer_class = NoteInstanceSerializer
