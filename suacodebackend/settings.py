@@ -33,8 +33,11 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['.railway.app', 'http://localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+CORS_ALLOWED_ORIGINS = [
+    'https://suacodefrontend.netlify.app', 'http://localhost:3000'
+]
 
 
 # Application definition
@@ -47,13 +50,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notes.apps.NotesConfig',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -156,4 +161,3 @@ DATABASES['default'].update(db_from_env)
 # Simplified static file serving.
 # https://pypi.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
